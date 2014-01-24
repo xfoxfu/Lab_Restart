@@ -1,7 +1,16 @@
 <?php
 header( 'Content-Type: text/html;charset=utf8' );
+
+define( 'TENCENT_POST' , 'format=json&oauth_consumer_key=801473843&access_token='.$_GET['tencent'].'&oauth_version=2.a&scope=all&openid=D8456307FB2A33A2C282635604322BB9&content=' );
+define( 'SINA_POST' , 'access_token='.$_GET['sina'].'&status=' );
+define( 'SINA_POST_URL' , 'https://api.weibo.com/2/statuses/update.json' );
+define( 'TENCENT_POST_URL' , 'https://open.t.qq.com/api/t/add' );
+define( 'SINA_TL_URL' , 'https://api.weibo.com/2/statuses/friends_timeline.json' );
+define( 'TENCENT_TL_URL' , 'https://open.t.qq.com/api/statuses/home_timeline' );
+define( 'SINA_TL' , 'access_token='.$_GET['sina'].'&count=20' );
+define( 'TENCENT_TL' , 'type=3&contenttype=0&pagetime=0&pageflag=0&reqnum=20&format=json&oauth_consumer_key=801473843&access_token='.$_GET['tencent'].'&oauth_version=2.a&scope=all&openid=D8456307FB2A33A2C282635604322BB9' );
+
 include_once './curl.php';
-include_once './config.php';
 date_default_timezone_set( 'Asia/Shanghai' );
 
 $s_tl_c = x_cURL_get( SINA_TL_URL , SINA_TL );
@@ -12,9 +21,6 @@ $t_tl_a = json_decode( $t_tl_c , true );
 
 $s_tl_a = $s_tl_a[ 'statuses' ];
 $t_tl_a = $t_tl_a[ 'data' ][ 'info' ];
-
-// $s_tl_i = $s_tl_a[ 'statuses' ];
-// $t_tl_i = $t_tl_a['data'][ 'info' ];
 
 for( $i = 0 ; $i <= ( count( $s_tl_a ) - 1 ) ; $i ++ ){
     $ia[ $i ][ 'time' ] = strtotime( $s_tl_a[ $i ][ 'created_at' ] );
