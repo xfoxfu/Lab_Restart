@@ -15,7 +15,7 @@ foreach( $json as $value ){
     echo $value[ 'name' ] . '<br/>' . $value[ 'text' ] . '<br/>' . $value[ 'time' ] . '<br/>';
     if( isset( $value[ 'source' ] ) ){
         echo $value[ 'source' ][ 'name' ] . '<br/>' . $value[ 'source' ][ 'text' ] . '<br/>' . $value[ 'source' ][ 'time' ] . '<br/>';
-        if( isset( $value[ 'source' ][ 'image' ] )> )
+        if( isset( $value[ 'source' ][ 'image' ] ) )
         {
             foreach( $value[ 'source' ][ 'image' ] as $value2 ){
                 echo '<img src="' . $value2 . '" alt="ͼƬ"/>';
