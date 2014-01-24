@@ -1,0 +1,8 @@
+# Sublime Text3 Project Files
+
+*.sublime-project
+
+*.sublime-workspace
+.settings/
+.buildpath
+.project
