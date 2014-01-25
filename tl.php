@@ -28,12 +28,29 @@ for( $i = 0 ; $i <= ( count( $s_tl_a ) - 1 ) ; $i ++ ){
                 'text' => $s_tl_a[ $i ][ 'retweeted_status' ][ 'text' ] , 
                 'name' => $s_tl_a[ $i ][ 'retweeted_status' ][ 'user' ][ 'screen_name' ] 
         );
-        if( isset( $s_tl_a[ $i ][ 'retweeted_status' ][ 'original_pic' ] ) ){
-            $ia[ $i ][ 'source' ][ 0 ] = $s_tl_a[ $i ][ 'retweeted_status' ][ 'original_pic' ];
+        // pic_urls
+        if( sizeof( $s_tl_a[ $i ][ 'retweeted_status' ][ 'pic_urls' ] ) > 0 ){
+            foreach( $s_tl_a[ $i ][ 'retweeted_status' ][ 'pic_urls' ] as $key => $value ){
+                if( isset( $value[ 'original_pic' ] ) ){
+                    $ia[ $i ][ 'image' ][ $key ] = $value[ 'original_pic' ];
+                } elseif( isset( $value[ 'bmiddle_pic' ] ) ){
+                    $ia[ $i ][ 'image' ][ $key ] = $value[ 'bmiddle_pic' ];
+                } elseif( isset( $value[ 'thumbnail_pic' ] ) ){
+                    $ia[ $i ][ 'image' ][ $key ] = $value[ 'thumbnail_pic' ];
+                }
+            }
         }
     }
-    if( isset( $s_tl_a[ $i ][ 'original_pic' ] ) ){
-        $ia[ $i ][ 0 ] = $s_tl_a[ $i ][ 'original_pic' ];
+    if( sizeof( $s_tl_a[ $i ][ 'pic_urls' ] ) > 0 ){
+        foreach( $s_tl_a[ $i ][ 'pic_urls' ] as $key => $value ){
+            if( isset( $value[ 'original_pic' ] ) ){
+                $ia[ $i ][ 'image' ][ $key ] = $value[ 'original_pic' ];
+            } elseif( isset( $value[ 'bmiddle_pic' ] ) ){
+                $ia[ $i ][ 'image' ][ $key ] = $value[ 'bmiddle_pic' ];
+            } elseif( isset( $value[ 'thumbnail_pic' ] ) ){
+                $ia[ $i ][ 'image' ][ $key ] = $value[ 'thumbnail_pic' ];
+            }
+        }
     }
 }
 $ia[ count( $s_tl_a ) ][ 'time' ] = 214748364;
